@@ -1,12 +1,11 @@
 async function search() {
     const searchTerm = document.getElementById('searchBox').value.toLowerCase();
-    const sheetDBUrl = 'https://sheetdb.io/api/v1/4pzezbprfb5nk'; // Replace with your actual SheetDB API URL
+    const publicSheetUrl = 'https://opensheet.elk.sh/1k-ousyrAw5qSigsNmIeuljkiNVe497kYjUbViB1O_k4/1'; // Replace with your actual public sheet URL
 
     try {
-        const response = await fetch(sheetDBUrl);
+        const response = await fetch(publicSheetUrl);
         const data = await response.json();
-        const rows = data;
-        const results = rows.filter(row => Object.values(row).some(cell => cell.toLowerCase().includes(searchTerm)));
+        const results = data.filter(row => Object.values(row).some(cell => cell.toString().toLowerCase().includes(searchTerm)));
 
         displayResults(results);
     } catch (error) {
